@@ -1,0 +1,142 @@
+/* Info Section Styles */
+.info-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-section-title {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+}
+
+.info-panel {
+    margin-bottom: 0.75rem;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+}
+
+.info-panel:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.info-panel-header {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.info-panel-header:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.info-panel-header.active {
+    background-color: rgba(100, 108, 255, 0.1);
+    color: #a5b4fc;
+}
+
+.info-panel-icon {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    transition: transform 0.2s ease;
+}
+
+.info-panel-header.active .info-panel-icon {
+    color: #a5b4fc;
+}
+
+.info-panel-content {
+    padding: 0 1.25rem 1.25rem 1.25rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    animation: slideDown 0.25s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.info-panel-content ol,
+.info-panel-content ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.info-panel-content li {
+    margin-bottom: 0.5rem;
+}
+
+.info-panel-content li strong {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.info-panel-content p {
+    margin: 0.75rem 0;
+}
+
+.info-note {
+    padding: 0.75rem 1rem;
+    background-color: rgba(100, 108, 255, 0.1);
+    border-left: 3px solid #646cff;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.troubleshoot-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.troubleshoot-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.troubleshoot-item strong {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.25rem;
+}
+
+.troubleshoot-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+    .info-panel-header {
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .info-panel-content {
+        padding: 0 1rem 1rem 1rem;
+        font-size: 0.9rem;
+    }
+}

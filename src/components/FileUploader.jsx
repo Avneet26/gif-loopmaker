@@ -1,5 +1,6 @@
 import { useCallback, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
+import './FileUploader.css';
 
 function FileUploader({ onImageSelect, onAudioSelect, imageFile, audioFile }) {
   const [imagePreview, setImagePreview] = useState(null);
