@@ -120,5 +120,5 @@ MIT © 2024
 <p align="center">
   Made with ❤️ for the slowed+reverb community
   <br><br>
-  <a href="https://YOUR_DOMAIN.com"><strong>🎵 Try LoopVid Now</strong></a>
+  <a href="https://gif-songmaker-dftqrz9ui-avneets-projects-15f5eaf6.vercel.app"><strong>🎵 Try LoopVid Now</strong></a>
 </p>
