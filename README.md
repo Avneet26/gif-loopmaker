@@ -4,7 +4,7 @@
 
 A simple, free tool to create those aesthetic looping GIF videos with slowed+reverb music for YouTube. No complex video editors, no sign-ups, no uploads to servers – everything runs directly in your browser!
 
-🔗 **[Try LoopVid Now →](https://YOUR_DOMAIN.com)**
+🔗 **[Try LoopVid Now →](https://gif-songmaker-dftqrz9ui-avneets-projects-15f5eaf6.vercel.app/)**
 
 ![Made with React](https://img.shields.io/badge/Made%20with-React-61DAFB?style=flat-square&logo=react)
 ![FFmpeg.wasm](https://img.shields.io/badge/Powered%20by-FFmpeg.wasm-007808?style=flat-square)

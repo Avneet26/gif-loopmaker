@@ -195,6 +195,11 @@ function FileUploader({ onImageSelect, onAudioSelect, imageFile, audioFile }) {
           style={{ display: 'none' }}
         />
       </div>
+
+      <div className="file-size-warning">
+        <span className="warning-icon">⚠️</span>
+        <span>For best results, keep file sizes under <strong>20MB</strong> each</span>
+      </div>
     </div>
   );
 }

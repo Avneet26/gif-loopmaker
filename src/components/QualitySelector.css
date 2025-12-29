@@ -43,6 +43,17 @@
     box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.1);
 }
 
+.quality-select option {
+    background-color: #1a1a2e;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.quality-select option:hover,
+.quality-select option:checked {
+    background-color: #2a2a4e;
+    color: rgba(255, 255, 255, 0.9);
+}
+
 .quality-hint {
     margin: 0.5rem 0 0 0;
     font-size: 0.85rem;
