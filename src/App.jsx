@@ -60,11 +60,33 @@ function App() {
     setVideoUrl(null);
   };
 
+  // Log event to Discord (via serverless function)
+  const logEvent = async (event, extraData = {}) => {
+    try {
+      await fetch('/api/log-event', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event,
+          quality,
+          imageType: imageFile?.type?.split('/')[1]?.toUpperCase() || 'Unknown',
+          audioType: audioFile?.type?.split('/')[1]?.toUpperCase() || 'Unknown',
+          ...extraData
+        })
+      });
+    } catch (err) {
+      // Silently fail - don't disrupt user experience
+      console.log('Analytics event not sent');
+    }
+  };
+
   const handleProcess = async () => {
     if (!imageFile || !audioFile) {
       setError('Please select both an image/GIF and an audio file');
       return;
     }
+
+    const startTime = Date.now(); // Track processing time
 
     setIsProcessing(true);
     setError(null);
@@ -104,6 +126,10 @@ function App() {
       const url = createVideoURL(blob);
       videoUrlRef.current = url;
       setVideoUrl(url);
+
+      // Log successful processing
+      const processingTime = Math.round((Date.now() - startTime) / 1000);
+      logEvent('video_processed', { processingTime });
 
       setProgress('Video processed successfully!');
       setProgressPercent(100);
