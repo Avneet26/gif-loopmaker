@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import { Analytics } from '@vercel/analytics/react';
 import { processVideo, downloadFile, createVideoURL, createAbortController, cancelProcessing } from './services/videoProcessor';
 
 // Components
@@ -214,7 +213,6 @@ function App() {
 
         <Footer />
       </div>
-      <Analytics />
     </div>
   );
 }
