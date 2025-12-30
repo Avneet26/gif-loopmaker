@@ -1,0 +1,31 @@
+# Robots.txt for LooperVid
+# https://www.loopervid.com/
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.loopervid.com/sitemap.xml
+
+# Allow all crawlers to index the site
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Disallow any private or development paths (if any)
+Disallow: /api/
+Disallow: /.well-known/

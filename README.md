@@ -1,10 +1,10 @@
-# 🎵 LoopVid - GIF Loop Video Maker
+# 🎵 LooperVid - GIF Loop Video Maker
 
 > Create YouTube-ready looping GIF videos with music in one click!
 
 A simple, free tool to create those aesthetic looping GIF videos with slowed+reverb music for YouTube. No complex video editors, no sign-ups, no uploads to servers – everything runs directly in your browser!
 
-🔗 **[Try LoopVid Now →](https://gif-songmaker-dftqrz9ui-avneets-projects-15f5eaf6.vercel.app/)**
+🔗 **[Try LooperVid Now →](https://www.loopervid.com/)**
 
 ![Made with React](https://img.shields.io/badge/Made%20with-React-61DAFB?style=flat-square&logo=react)
 ![FFmpeg.wasm](https://img.shields.io/badge/Powered%20by-FFmpeg.wasm-007808?style=flat-square)
@@ -46,11 +46,11 @@ A simple, free tool to create those aesthetic looping GIF videos with slowed+rev
 
 ---
 
-## � Privacy First
+## 🔒 Privacy First
 
 **Your files stay on YOUR device.** 
 
-LoopVid uses [FFmpeg.wasm](https://ffmpegwasm.netlify.app/) to process videos entirely in your browser. Nothing is uploaded to any server. Your images, audio, and videos never leave your computer.
+LooperVid uses [FFmpeg.wasm](https://ffmpegwasm.netlify.app/) to process videos entirely in your browser. Nothing is uploaded to any server. Your images, audio, and videos never leave your computer.
 
 ---
 
@@ -102,7 +102,7 @@ LoopVid uses [FFmpeg.wasm](https://ffmpegwasm.netlify.app/) to process videos en
 
 ---
 
-## �️ Built With
+## 🛠️ Built With
 
 - [React](https://react.dev/) – UI framework
 - [Vite](https://vitejs.dev/) – Build tool
@@ -113,12 +113,13 @@ LoopVid uses [FFmpeg.wasm](https://ffmpegwasm.netlify.app/) to process videos en
 
 ## 📄 License
 
-MIT © 2024
+MIT © 2024 [Avneet Virdi](https://github.com/Avneet26)
 
 ---
 
 <p align="center">
-  Made with ❤️ for the slowed+reverb community
+  Made with ❤️ by <a href="https://github.com/Avneet26"><strong>Avneet Virdi</strong></a>
   <br><br>
-  <a href="https://gif-songmaker-dftqrz9ui-avneets-projects-15f5eaf6.vercel.app"><strong>🎵 Try LoopVid Now</strong></a>
+  <a href="https://www.loopervid.com/"><strong>🎵 Try LooperVid Now</strong></a>
 </p>
+

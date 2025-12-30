@@ -147,7 +147,7 @@ function App() {
 
   const handleDownload = () => {
     if (videoBlob) {
-      downloadFile(videoBlob, `loopvid_${Date.now()}.mp4`);
+      downloadFile(videoBlob, `loopervid_${Date.now()}.mp4`);
     }
   };
 

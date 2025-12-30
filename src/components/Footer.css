@@ -12,9 +12,65 @@
     font-size: 0.875rem;
 }
 
+.footer-author {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+}
+
+.footer-author .heart {
+    display: inline-block;
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.author-link {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.author-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
+    transition: width 0.3s ease;
+}
+
+.author-link:hover {
+    color: var(--color-accent-hover);
+}
+
+.author-link:hover::after {
+    width: 100%;
+}
+
 .footer-tech {
     font-size: 0.75rem;
     color: var(--color-text-muted);
     margin-top: 0.5rem;
     opacity: 0.6;
+}
+
+.footer-copyright {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-top: 0.75rem;
+    opacity: 0.5;
 }

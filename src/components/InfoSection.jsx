@@ -10,7 +10,7 @@ function InfoSection() {
 
     return (
         <section className="info-section">
-            <h2 className="info-section-title">ℹ️ About LoopVid</h2>
+            <h2 className="info-section-title">ℹ️ About LooperVid</h2>
 
             {/* How to Use */}
             <div className="info-panel">
@@ -52,7 +52,7 @@ function InfoSection() {
                     <div className="info-panel-content">
                         <p><strong>Your files stay on YOUR device.</strong></p>
                         <p>
-                            LoopVid processes videos entirely in your browser using WebAssembly technology.
+                            LooperVid processes videos entirely in your browser using WebAssembly technology.
                             Nothing is uploaded to any server. Your images, audio, and videos never leave your computer.
                         </p>
                         <ul>

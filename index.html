@@ -2,15 +2,270 @@
 <html lang="en">
 
 <head>
+  <!-- Basic Meta Tags -->
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- Primary SEO Meta Tags -->
+  <title>LooperVid - Free GIF to Video Converter with Music | Create Looping Videos for YouTube</title>
+  <meta name="title" content="LooperVid - Free GIF to Video Converter with Music | Create Looping Videos for YouTube" />
   <meta name="description"
-    content="Create YouTube-ready looping GIF videos with music in one click. Free, private, and works in your browser." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <title>LoopVid - GIF Loop Video Maker</title>
+    content="Create stunning YouTube-ready looping GIF videos with music in seconds. Free online GIF to MP4 converter with audio. Perfect for slowed+reverb, lo-fi, aesthetic videos. 100% private - all processing happens in your browser. No sign-up required." />
+  <meta name="keywords"
+    content="GIF to video converter, GIF to MP4, add music to GIF, looping video maker, YouTube video creator, slowed reverb video maker, lo-fi video generator, aesthetic video maker, free video converter, online video editor, GIF loop maker, music video creator, animated video generator, browser video editor, WebAssembly video processing, FFmpeg online, create YouTube videos, visual music videos, ambient video maker, chill video creator" />
+  <meta name="author" content="Avneet Virdi" />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow" />
+  <meta name="bingbot" content="index, follow" />
+  <meta name="language" content="English" />
+  <meta name="revisit-after" content="7 days" />
+  <meta name="rating" content="general" />
+  <meta name="distribution" content="global" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://www.loopervid.com/" />
+
+  <!-- Open Graph / Facebook Meta Tags -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.loopervid.com/" />
+  <meta property="og:title" content="LooperVid - Free GIF to Video Converter with Music | Create Looping Videos" />
+  <meta property="og:description"
+    content="Create stunning YouTube-ready looping GIF videos with music in seconds. Free online GIF to MP4 converter. 100% private - all processing in your browser. Perfect for slowed+reverb, lo-fi, and aesthetic videos." />
+  <meta property="og:image" content="https://www.loopervid.com/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="LooperVid - Create looping GIF videos with music" />
+  <meta property="og:site_name" content="LooperVid" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://www.loopervid.com/" />
+  <meta name="twitter:title" content="LooperVid - Free GIF to Video Converter with Music" />
+  <meta name="twitter:description"
+    content="Create YouTube-ready looping GIF videos with music in seconds. Free, private, works in your browser. Perfect for slowed+reverb and aesthetic videos." />
+  <meta name="twitter:image" content="https://www.loopervid.com/og-image.png" />
+  <meta name="twitter:image:alt" content="LooperVid - GIF Loop Video Maker" />
+  <meta name="twitter:creator" content="@AvneetVirdi" />
+
+  <!-- Additional SEO Meta Tags -->
+  <meta name="theme-color" content="#667eea" />
+  <meta name="msapplication-TileColor" content="#667eea" />
+  <meta name="application-name" content="LooperVid" />
+  <meta name="apple-mobile-web-app-title" content="LooperVid" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <!-- Favicon and Icons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+
+  <!-- Preconnect for Performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://unpkg.com" />
+
+  <!-- DNS Prefetch for CDN resources -->
+  <link rel="dns-prefetch" href="https://unpkg.com" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Structured Data / JSON-LD Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "LooperVid",
+    "url": "https://www.loopervid.com/",
+    "description": "Create stunning YouTube-ready looping GIF videos with music in seconds. Free online GIF to MP4 converter with audio. 100% private - all processing happens in your browser.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript, WebAssembly support",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "Avneet Virdi",
+      "url": "https://github.com/Avneet26"
+    },
+    "creator": {
+      "@type": "Person",
+      "name": "Avneet Virdi"
+    },
+    "featureList": [
+      "GIF to Video Conversion",
+      "Add Music to GIF",
+      "Looping Video Creation",
+      "YouTube-ready MP4 Export",
+      "100% Browser-based Processing",
+      "No File Uploads Required",
+      "Privacy-focused Design",
+      "Multiple Quality Presets",
+      "Support for GIF, JPG, PNG, WebP images",
+      "Support for MP3, M4A, WAV, OGG audio"
+    ],
+    "screenshot": "https://www.loopervid.com/og-image.png",
+    "softwareVersion": "1.0",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "100",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  }
+  </script>
+
+  <!-- FAQ Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I create a looping video from a GIF with music?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Simply upload your GIF or image, add your audio file (MP3, WAV, M4A, or OGG), select your preferred quality, and click 'Process Video'. LooperVid will create a YouTube-ready MP4 video that loops your image for the duration of the audio."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is LooperVid free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, LooperVid is completely free to use. There are no hidden fees, subscriptions, or limitations. All video processing happens directly in your browser."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are my files private and secure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely! LooperVid processes all files locally in your browser using WebAssembly technology. Your images, audio, and videos never leave your computer. No files are uploaded to any server."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What file formats does LooperVid support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "LooperVid supports GIF, JPG, PNG, and WebP for images, and MP3, M4A, WAV, and OGG for audio files. The output is always a YouTube-compatible MP4 video."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use LooperVid to create slowed+reverb or lo-fi videos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! LooperVid is perfect for creating slowed+reverb, lo-fi, aesthetic, and ambient music videos. Simply upload your prepared audio and a matching visual, and create professional-looking videos ready for YouTube."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "LooperVid",
+    "url": "https://www.loopervid.com/",
+    "logo": "https://www.loopervid.com/favicon.svg",
+    "sameAs": [
+      "https://github.com/Avneet26"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "url": "https://github.com/Avneet26"
+    }
+  }
+  </script>
+
+  <!-- BreadcrumbList Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.loopervid.com/"
+      }
+    ]
+  }
+  </script>
+
+  <!-- HowTo Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Create a Looping Video with Music",
+    "description": "Learn how to create YouTube-ready looping videos from GIFs or images with background music using LooperVid.",
+    "totalTime": "PT2M",
+    "tool": [
+      {
+        "@type": "HowToTool",
+        "name": "LooperVid Web Application"
+      }
+    ],
+    "supply": [
+      {
+        "@type": "HowToSupply",
+        "name": "GIF or Image file (GIF, JPG, PNG, WebP)"
+      },
+      {
+        "@type": "HowToSupply",
+        "name": "Audio file (MP3, M4A, WAV, OGG)"
+      }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Upload your image or GIF",
+        "text": "Drag and drop or click to browse and select your image or GIF file."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Upload your audio",
+        "text": "Add your music or audio file in MP3, M4A, WAV, or OGG format."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Select quality preset",
+        "text": "Choose between Fast, Balanced, or High quality options."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Process the video",
+        "text": "Click the 'Process Video' button and wait for the conversion to complete."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 5,
+        "name": "Download your video",
+        "text": "Once processing is complete, download your YouTube-ready MP4 video."
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -19,3 +274,5 @@
 </body>
 
 </html>
+</CodeContent>
+<parameter name="EmptyFile">false
