@@ -1,13 +1,7 @@
 {
-    "rewrites": [
-        {
-            "source": "/api/:path*",
-            "destination": "/api/:path*"
-        }
-    ],
     "functions": {
-        "api/log-event.js": {
-            "runtime": "@vercel/node@3.0.0"
+        "api/*.js": {
+            "runtime": "@vercel/node@3.2.0"
         }
     }
 }
