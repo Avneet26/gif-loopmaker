@@ -1,11 +1,12 @@
+/* Error Message - Modern Minimal */
 .error-message {
     padding: 1rem 1.25rem;
-    background-color: rgba(220, 38, 38, 0.15);
-    border: 2px solid rgba(220, 38, 38, 0.6);
-    border-radius: 8px;
-    color: #fca5a5;
-    margin: 1rem 0;
-    animation: slideIn 0.3s ease-out;
+    background-color: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 12px;
+    color: var(--color-error);
+    margin: 0.5rem 0;
+    animation: fadeIn 0.2s ease-out;
 }
 
 .error-content {
@@ -17,7 +18,8 @@
 
 .error-message p {
     margin: 0;
-    font-weight: 500;
+    font-weight: 400;
+    font-size: 0.95rem;
     line-height: 1.5;
     flex: 1;
 }
@@ -25,8 +27,8 @@
 .error-dismiss {
     background: none;
     border: none;
-    color: #fca5a5;
-    font-size: 1.5rem;
+    color: var(--color-error);
+    font-size: 1.25rem;
     line-height: 1;
     cursor: pointer;
     padding: 0;
@@ -38,21 +40,22 @@
     border-radius: 4px;
     transition: all 0.2s ease;
     flex-shrink: 0;
+    opacity: 0.7;
 }
 
 .error-dismiss:hover {
-    background-color: rgba(220, 38, 38, 0.3);
-    color: #fff;
+    opacity: 1;
+    background-color: rgba(239, 68, 68, 0.15);
 }
 
 .error-dismiss:active {
     transform: scale(0.9);
 }
 
-@keyframes slideIn {
+@keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(-10px);
+        transform: translateY(-5px);
     }
 
     to {

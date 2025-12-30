@@ -1,58 +1,68 @@
+/* Action Buttons - Modern Minimal */
 .actions {
     display: flex;
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 0.5rem;
 }
 
 .process-btn,
 .download-btn,
 .reset-btn {
-    padding: 0.75rem 2rem;
-    font-size: 1rem;
-    font-weight: 600;
+    padding: 0.875rem 2rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-family: inherit;
     border-radius: 8px;
     border: none;
     cursor: pointer;
     transition: all 0.2s ease;
-    min-width: 150px;
+    min-width: 160px;
 }
 
+/* Primary Button - White/Black like Vercel */
 .process-btn {
-    background-color: #646cff;
-    color: white;
+    background-color: var(--color-accent);
+    color: var(--color-accent-text);
 }
 
 .process-btn:hover:not(:disabled) {
-    background-color: #535bf2;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(100, 108, 255, 0.4);
+    background-color: var(--color-accent-secondary);
+    transform: translateY(-1px);
+}
+
+.process-btn:active:not(:disabled) {
+    transform: translateY(0);
 }
 
 .process-btn:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
 }
 
+/* Secondary Button - Outlined */
 .download-btn {
-    background-color: #10b981;
-    color: white;
+    background-color: transparent;
+    color: var(--color-success);
+    border: 1px solid var(--color-success);
 }
 
 .download-btn:hover {
-    background-color: #059669;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    background-color: rgba(34, 197, 94, 0.1);
 }
 
+/* Tertiary Button - Ghost */
 .reset-btn {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
 }
 
 .reset-btn:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--color-border-hover);
+    color: var(--color-text-primary);
 }
 
 @media (max-width: 768px) {

@@ -1,62 +1,68 @@
+/* Quality Selector - Modern Minimal */
 .quality-selector {
-    margin: 1.5rem 0;
-    padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.03);
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 0.5rem 0;
+    padding: 1.25rem;
+    background-color: transparent;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
 }
 
 .quality-selector label {
     display: block;
-    margin-bottom: 0.5rem;
-    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 0.75rem;
+    color: var(--color-text-secondary);
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .quality-select {
     width: 100%;
-    max-width: 400px;
-    padding: 0.75rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    color: rgba(255, 255, 255, 0.9);
+    max-width: 280px;
+    padding: 0.75rem 1rem;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    color: var(--color-text-primary);
     font-size: 0.95rem;
+    font-family: inherit;
     cursor: pointer;
     transition: all 0.2s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.5)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
 }
 
 .quality-select:hover:not(:disabled) {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--color-border-hover);
+    background-color: rgba(255, 255, 255, 0.02);
 }
 
 .quality-select:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
 }
 
 .quality-select:focus {
     outline: none;
-    border-color: #646cff;
-    box-shadow: 0 0 0 3px rgba(100, 108, 255, 0.1);
+    border-color: rgba(139, 92, 246, 0.5);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
 }
 
 .quality-select option {
-    background-color: #1a1a2e;
-    color: rgba(255, 255, 255, 0.9);
-}
-
-.quality-select option:hover,
-.quality-select option:checked {
-    background-color: #2a2a4e;
-    color: rgba(255, 255, 255, 0.9);
+    background-color: #0a0a0a;
+    color: var(--color-text-primary);
+    padding: 0.5rem;
 }
 
 .quality-hint {
-    margin: 0.5rem 0 0 0;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
-    font-style: italic;
+    margin: 0.75rem 0 0 0;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    font-style: normal;
 }

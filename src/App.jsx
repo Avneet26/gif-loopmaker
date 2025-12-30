@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { processVideo, downloadFile, createVideoURL, createAbortController, cancelProcessing } from './services/videoProcessor';
 
 // Components
@@ -11,10 +11,22 @@ import ActionButtons from './components/ActionButtons';
 import VideoPreview from './components/VideoPreview';
 import InfoSection from './components/InfoSection';
 import Footer from './components/Footer';
+import ThemeToggle from './components/ThemeToggle';
 
 import './App.css';
 
 function App() {
+  // Theme state
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem('theme');
+    return saved || 'dark';
+  });
+
+  // Apply theme to document
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
   // File state
   const [imageFile, setImageFile] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
@@ -154,6 +166,7 @@ function App() {
 
   return (
     <div className="app">
+      <ThemeToggle theme={theme} setTheme={setTheme} />
       <div className="container">
         <Header />
 

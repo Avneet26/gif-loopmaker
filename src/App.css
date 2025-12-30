@@ -1,14 +1,15 @@
-/* App Layout Styles */
+/* App Layout Styles - Modern Minimal */
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 3rem 2rem;
   width: 100%;
   flex: 1;
   display: flex;
@@ -24,6 +25,6 @@
 
 @media (max-width: 768px) {
   .container {
-    padding: 1rem;
+    padding: 2rem 1rem;
   }
 }
