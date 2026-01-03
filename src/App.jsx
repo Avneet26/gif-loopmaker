@@ -13,6 +13,20 @@ import InfoSection from './components/InfoSection';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
 
+// Analytics
+import {
+  trackImageUpload,
+  trackAudioUpload,
+  trackQualityChange,
+  trackProcessStart,
+  trackProcessComplete,
+  trackProcessError,
+  trackProcessCancel,
+  trackDownload,
+  trackReset,
+  trackThemeToggle
+} from './utils/analytics';
+
 import './App.css';
 
 function App() {
@@ -36,7 +50,13 @@ function App() {
   const [isCancelling, setIsCancelling] = useState(false);
   const [progress, setProgress] = useState('');
   const [progressPercent, setProgressPercent] = useState(0);
-  const [quality, setQuality] = useState('balanced');
+  const [quality, setQualityState] = useState('balanced');
+
+  // Wrapper to track quality changes
+  const setQuality = (newQuality) => {
+    setQualityState(newQuality);
+    trackQualityChange(newQuality);
+  };
 
   // Output state
   const [error, setError] = useState(null);
@@ -52,12 +72,18 @@ function App() {
     setImageFile(file);
     setError(null);
     setVideoUrl(null);
+    // Track image upload
+    const fileType = file.type.split('/')[1] || file.name.split('.').pop();
+    trackImageUpload(fileType, file.size);
   };
 
   const handleAudioSelect = (file) => {
     setAudioFile(file);
     setError(null);
     setVideoUrl(null);
+    // Track audio upload
+    const fileType = file.type.split('/')[1] || file.name.split('.').pop();
+    trackAudioUpload(fileType, file.size);
   };
 
   // Log event to Discord (via serverless function)
@@ -87,6 +113,13 @@ function App() {
     }
 
     const startTime = Date.now(); // Track processing time
+
+    // Track process start
+    trackProcessStart({
+      quality,
+      image_type: imageFile.type.split('/')[1] || 'unknown',
+      audio_type: audioFile.type.split('/')[1] || 'unknown',
+    });
 
     setIsProcessing(true);
     setError(null);
@@ -130,6 +163,7 @@ function App() {
       // Log successful processing
       const processingTime = Math.round((Date.now() - startTime) / 1000);
       logEvent('video_processed', { processingTime });
+      trackProcessComplete(processingTime, quality);
 
       setProgress('Video processed successfully!');
       setProgressPercent(100);
@@ -151,9 +185,11 @@ function App() {
         setProgressPercent(0);
         setTimeout(() => setProgress(''), 2000);
       } else {
-        setError(err.message || 'Something went wrong while processing the video.');
+        const errorMessage = err.message || 'Something went wrong while processing the video.';
+        setError(errorMessage);
         setProgress('');
         setProgressPercent(0);
+        trackProcessError(errorMessage);
       }
     } finally {
       setIsProcessing(false);
@@ -167,12 +203,14 @@ function App() {
       setIsCancelling(true);
       setProgress('Cancelling...');
       cancelProcessing();
+      trackProcessCancel();
     }
   };
 
   const handleDownload = () => {
     if (videoBlob) {
       downloadFile(videoBlob, `loopervid_${Date.now()}.mp4`);
+      trackDownload();
     }
   };
 
@@ -188,6 +226,7 @@ function App() {
     setError(null);
     setProgress('');
     setProgressPercent(0);
+    trackReset();
   };
 
   return (

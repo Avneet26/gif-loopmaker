@@ -1,10 +1,12 @@
 import './ThemeToggle.css';
+import { trackThemeToggle } from '../utils/analytics';
 
 function ThemeToggle({ theme, setTheme }) {
     const toggleTheme = () => {
         const newTheme = theme === 'dark' ? 'light' : 'dark';
         setTheme(newTheme);
         localStorage.setItem('theme', newTheme);
+        trackThemeToggle(newTheme);
     };
 
     return (
