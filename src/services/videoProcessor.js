@@ -211,10 +211,12 @@ export async function processVideo(imageFile, audioFile, quality = 'balanced', o
 
     if (isGif) {
       // For GIFs: loop the GIF continuously to match audio length
+      // Scale filter ensures dimensions are divisible by 2 (required by libx264)
+      // -2 means "round to nearest even number while maintaining aspect ratio"
       ffmpegArgs.push(
         '-i', imageName,
         '-i', audioName,
-        '-filter_complex', '[0:v]loop=loop=-1:size=32767:start=0,setpts=N/FRAME_RATE/TB[v]',
+        '-filter_complex', '[0:v]loop=loop=-1:size=32767:start=0,setpts=N/FRAME_RATE/TB,scale=trunc(iw/2)*2:trunc(ih/2)*2[v]',
         '-map', '[v]',
         '-map', '1:a',
         '-c:v', 'libx264',
@@ -228,10 +230,12 @@ export async function processVideo(imageFile, audioFile, quality = 'balanced', o
       );
     } else {
       // For static images: use -loop 1 to loop the image
+      // Scale filter ensures dimensions are divisible by 2 (required by libx264)
       ffmpegArgs.push(
         '-loop', '1',
         '-i', imageName,
         '-i', audioName,
+        '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2',
         '-c:v', 'libx264',
         '-preset', preset,
         '-crf', crf,
