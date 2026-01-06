@@ -3,5 +3,33 @@
         "api/*.js": {
             "runtime": "@vercel/node@3.2.0"
         }
-    }
+    },
+    "redirects": [
+        {
+            "source": "/:path*",
+            "has": [
+                {
+                    "type": "host",
+                    "value": "loopervid.com"
+                }
+            ],
+            "destination": "https://www.loopervid.com/:path*",
+            "permanent": true
+        }
+    ],
+    "headers": [
+        {
+            "source": "/(.*)",
+            "headers": [
+                {
+                    "key": "Strict-Transport-Security",
+                    "value": "max-age=31536000; includeSubDomains; preload"
+                },
+                {
+                    "key": "X-Content-Type-Options",
+                    "value": "nosniff"
+                }
+            ]
+        }
+    ]
 }
