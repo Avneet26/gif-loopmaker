@@ -4,7 +4,7 @@ function VideoPreview({ videoUrl }) {
     if (!videoUrl) return null;
 
     return (
-        <div className="video-preview">
+        <div className="video-preview glass-card" style={{ padding: '2rem' }}>
             <h3>Preview</h3>
             <video controls src={videoUrl} className="output-video">
                 Your browser does not support the video tag.

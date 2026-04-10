@@ -1,10 +1,7 @@
-/* Progress Bar - Modern Minimal */
 .progress-message {
-    padding: 1.25rem;
-    background-color: rgba(139, 92, 246, 0.05);
-    border: 1px solid rgba(139, 92, 246, 0.15);
-    border-radius: 12px;
+    padding: 1.5rem;
     color: var(--color-text-primary);
+    margin: 1.5rem 0;
 }
 
 .progress-header {
@@ -64,11 +61,35 @@
     border-radius: 3px;
 }
 
-.progress-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 0;
-    visibility: hidden;
+.progress-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.75rem;
+}
+
+.progress-timers {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    font-family: inherit;
+    font-variant-numeric: tabular-nums;
+}
+
+.dot-separator {
+    opacity: 0.5;
+}
+
+.progress-numbered {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.progress-text-numbered {
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-accent);
 }

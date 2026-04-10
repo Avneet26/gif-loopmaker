@@ -30,13 +30,14 @@ async function loadFFmpeg() {
   });
 
   try {
-    // Load FFmpeg core
-    const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.6/dist/esm';
+    // Load FFmpeg core-mt safely for multi-threading
+    const baseURL = 'https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/esm';
 
     try {
       await ffmpeg.load({
         coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
         wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+        workerURL: await toBlobURL(`${baseURL}/ffmpeg-core.worker.js`, 'text/javascript'),
       });
     } catch (loadError) {
       console.error('Error loading FFmpeg core files:', loadError);
@@ -102,7 +103,7 @@ export function cancelProcessing() {
  * @param {AbortSignal} signal - Optional abort signal for cancellation
  * @returns {Promise<Blob>} - Blob of the processed video
  */
-export async function processVideo(imageFile, audioFile, quality = 'balanced', onProgress, signal) {
+export async function processVideo(imageFile, audioFile, settings = { videoResolution: '1080p', audioBitrate: '192k' }, onProgress, signal) {
   // Validate inputs
   if (!imageFile) {
     throw new Error('Image file is required');
@@ -122,13 +123,13 @@ export async function processVideo(imageFile, audioFile, quality = 'balanced', o
     throw new Error('Invalid audio file type. Please upload an MP3, M4A, WAV, or OGG audio file.');
   }
 
-  // Validate file sizes (30MB limit for client-side processing)
-  const maxSize = 30 * 1024 * 1024; // 30MB
+  // Validate file sizes (50MB limit for client-side processing)
+  const maxSize = 50 * 1024 * 1024; // 50MB
   if (imageFile.size > maxSize) {
-    throw new Error('Image file is too large. Maximum size is 30MB for client-side processing.');
+    throw new Error('Image file is too large. Maximum size is 50MB for client-side processing.');
   }
   if (audioFile.size > maxSize) {
-    throw new Error('Audio file is too large. Maximum size is 30MB for client-side processing.');
+    throw new Error('Audio file is too large. Maximum size is 50MB for client-side processing.');
   }
 
   try {
@@ -185,25 +186,18 @@ export async function processVideo(imageFile, audioFile, quality = 'balanced', o
 
     console.log(`Processing ${isGif ? 'GIF' : 'image'} with audio using FFmpeg...`);
 
-    // Determine quality settings based on user selection
-    let preset, crf, audioBitrate;
-    switch (quality) {
-      case 'fast':
-        preset = 'ultrafast';
-        crf = '30';
-        audioBitrate = '128k';
-        break;
-      case 'high':
-        preset = 'veryfast';
-        crf = '23';
-        audioBitrate = '192k';
-        break;
-      case 'balanced':
-      default:
-        preset = 'ultrafast';
-        crf = '28';
-        audioBitrate = '128k';
-        break;
+    // Determine settings based on user selection
+    let preset = 'fast';
+    let crf = '26';
+    let audioBitrate = settings.audioBitrate || '192k';
+    
+    let resolutionHeight;
+    switch(settings.videoResolution) {
+      case '720p': resolutionHeight = 720; break;
+      case '1080p': resolutionHeight = 1080; break;
+      case '2k': resolutionHeight = 1440; break;
+      case '4k': resolutionHeight = 2160; break;
+      default: resolutionHeight = 1080; break;
     }
 
     // Build FFmpeg command based on file type
@@ -216,7 +210,7 @@ export async function processVideo(imageFile, audioFile, quality = 'balanced', o
       ffmpegArgs.push(
         '-i', imageName,
         '-i', audioName,
-        '-filter_complex', '[0:v]loop=loop=-1:size=32767:start=0,setpts=N/FRAME_RATE/TB,scale=trunc(iw/2)*2:trunc(ih/2)*2[v]',
+        '-filter_complex', `[0:v]loop=loop=-1:size=32767:start=0,setpts=N/FRAME_RATE/TB,scale=-2:${resolutionHeight}[v]`,
         '-map', '[v]',
         '-map', '1:a',
         '-c:v', 'libx264',
@@ -235,7 +229,7 @@ export async function processVideo(imageFile, audioFile, quality = 'balanced', o
         '-loop', '1',
         '-i', imageName,
         '-i', audioName,
-        '-vf', 'scale=trunc(iw/2)*2:trunc(ih/2)*2',
+        '-vf', `scale=-2:${resolutionHeight}`,
         '-c:v', 'libx264',
         '-preset', preset,
         '-crf', crf,

@@ -1,8 +1,6 @@
 /* Info Section - Modern Minimal */
 .info-section {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--color-border);
+    margin-top: 2rem;
 }
 
 .info-section-title {

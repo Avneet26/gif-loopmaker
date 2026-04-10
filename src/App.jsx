@@ -4,7 +4,7 @@ import { processVideo, downloadFile, createVideoURL, createAbortController, canc
 // Components
 import Header from './components/Header';
 import FileUploader from './components/FileUploader';
-import QualitySelector from './components/QualitySelector';
+import AdvancedSettings from './components/AdvancedSettings';
 import ProgressBar from './components/ProgressBar';
 import ErrorMessage from './components/ErrorMessage';
 import ActionButtons from './components/ActionButtons';
@@ -12,12 +12,12 @@ import VideoPreview from './components/VideoPreview';
 import InfoSection from './components/InfoSection';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
+import AnimatedBackground from './components/AnimatedBackground';
 
 // Analytics
 import {
   trackImageUpload,
   trackAudioUpload,
-  trackQualityChange,
   trackProcessStart,
   trackProcessComplete,
   trackProcessError,
@@ -33,7 +33,8 @@ function App() {
   // Theme state
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('theme');
-    return saved || 'dark';
+    if (saved) return saved;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   });
 
   // Apply theme to document
@@ -50,13 +51,11 @@ function App() {
   const [isCancelling, setIsCancelling] = useState(false);
   const [progress, setProgress] = useState('');
   const [progressPercent, setProgressPercent] = useState(0);
-  const [quality, setQualityState] = useState('balanced');
-
-  // Wrapper to track quality changes
-  const setQuality = (newQuality) => {
-    setQualityState(newQuality);
-    trackQualityChange(newQuality);
-  };
+  const [startTime, setStartTime] = useState(null);
+  const [settings, setSettings] = useState({
+    videoResolution: '1080p',
+    audioBitrate: '192k'
+  });
 
   // Output state
   const [error, setError] = useState(null);
@@ -94,7 +93,7 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           event,
-          quality,
+          settings,
           imageType: imageFile?.type?.split('/')[1]?.toUpperCase() || 'Unknown',
           audioType: audioFile?.type?.split('/')[1]?.toUpperCase() || 'Unknown',
           ...extraData
@@ -112,11 +111,12 @@ function App() {
       return;
     }
 
-    const startTime = Date.now(); // Track processing time
+    const now = Date.now();
+    setStartTime(now);
 
     // Track process start
     trackProcessStart({
-      quality,
+      settings,
       image_type: imageFile.type.split('/')[1] || 'unknown',
       audio_type: audioFile.type.split('/')[1] || 'unknown',
     });
@@ -147,7 +147,7 @@ function App() {
       setProgress('Processing video (this may take a minute)...');
       setProgressPercent(15);
 
-      const blob = await processVideo(imageFile, audioFile, quality, (progressValue) => {
+      const blob = await processVideo(imageFile, audioFile, settings, (progressValue) => {
         const mappedProgress = 15 + (progressValue * 75);
         setProgressPercent(Math.round(mappedProgress));
       }, signal);
@@ -161,9 +161,9 @@ function App() {
       setVideoUrl(url);
 
       // Log successful processing
-      const processingTime = Math.round((Date.now() - startTime) / 1000);
+      const processingTime = Math.round((Date.now() - now) / 1000);
       logEvent('video_processed', { processingTime });
-      trackProcessComplete(processingTime, quality);
+      trackProcessComplete(processingTime, settings.videoResolution);
 
       setProgress('Video processed successfully!');
       setProgressPercent(100);
@@ -226,33 +226,40 @@ function App() {
     setError(null);
     setProgress('');
     setProgressPercent(0);
+    setStartTime(null);
     trackReset();
   };
 
   return (
     <div className="app">
+      <AnimatedBackground />
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <ThemeToggle theme={theme} setTheme={setTheme} />
       <div className="container">
         <Header />
 
-        <main className="main-content">
-          <FileUploader
-            onImageSelect={handleImageSelect}
-            onAudioSelect={handleAudioSelect}
-            imageFile={imageFile}
-            audioFile={audioFile}
-          />
+        <main id="main-content" className="main-content" role="main">
+          <section aria-label="File Upload">
+            <FileUploader
+              onImageSelect={handleImageSelect}
+              onAudioSelect={handleAudioSelect}
+              imageFile={imageFile}
+              audioFile={audioFile}
+            />
+          </section>
 
           <ErrorMessage
             message={error}
             onDismiss={() => setError(null)}
           />
 
-          <QualitySelector
-            quality={quality}
-            setQuality={setQuality}
-            disabled={isProcessing}
-          />
+          <section aria-label="Export Settings">
+            <AdvancedSettings
+              settings={settings}
+              setSettings={setSettings}
+              disabled={isProcessing}
+            />
+          </section>
 
           <ProgressBar
             progress={progress}
@@ -260,16 +267,19 @@ function App() {
             isProcessing={isProcessing}
             isCancelling={isCancelling}
             onCancel={handleCancel}
+            startTime={startTime}
           />
 
-          <ActionButtons
-            onProcess={handleProcess}
-            onDownload={handleDownload}
-            onReset={handleReset}
-            isProcessing={isProcessing}
-            canProcess={imageFile && audioFile}
-            hasVideo={!!videoUrl}
-          />
+          <section aria-label="Actions">
+            <ActionButtons
+              onProcess={handleProcess}
+              onDownload={handleDownload}
+              onReset={handleReset}
+              isProcessing={isProcessing}
+              canProcess={imageFile && audioFile}
+              hasVideo={!!videoUrl}
+            />
+          </section>
 
           <VideoPreview videoUrl={videoUrl} />
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
   <!-- Basic Meta Tags -->
@@ -59,6 +59,10 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="format-detection" content="telephone=no" />
 
+  <!-- International SEO -->
+  <link rel="alternate" hreflang="en" href="https://www.loopervid.com/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.loopervid.com/" />
+
   <!-- Favicon and Icons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="apple-touch-icon" href="/favicon.svg" />
@@ -70,6 +74,9 @@
 
   <!-- DNS Prefetch for CDN resources -->
   <link rel="dns-prefetch" href="https://unpkg.com" />
+
+  <!-- Preload critical font for LCP -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -112,14 +119,13 @@
       "Support for MP3, M4A, WAV, OGG audio"
     ],
     "screenshot": "https://www.loopervid.com/og-image.png",
-    "softwareVersion": "1.0",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "100",
-      "bestRating": "5",
-      "worstRating": "1"
-    }
+    "softwareVersion": "2.0",
+    "datePublished": "2024-12-01",
+    "dateModified": "2026-04-11",
+    "downloadUrl": "https://www.loopervid.com/",
+    "permissions": "no special permissions required",
+    "memoryRequirements": "512MB",
+    "processorRequirements": "Modern browser with WebAssembly support"
   }
   </script>
 
@@ -163,10 +169,26 @@
       },
       {
         "@type": "Question",
+        "name": "Can I choose the video resolution and audio quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! LooperVid V2.0 lets you pick your video resolution (720p, 1080p, 2K, or 4K) and audio bitrate (128, 192, 256, or 320 kbps) from the Export Settings panel before processing."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Can I use LooperVid to create slowed+reverb or lo-fi videos?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes! LooperVid is perfect for creating slowed+reverb, lo-fi, aesthetic, and ambient music videos. Simply upload your prepared audio and a matching visual, and create professional-looking videos ready for YouTube."
+          "text": "Yes! LooperVid is perfect for creating slowed+reverb, lo-fi, aesthetic, and ambient music videos. Simply upload your prepared audio and a matching visual, choose your preferred resolution and bitrate, and create professional-looking videos ready for YouTube."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is processing slow at 2K or 4K resolution?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Higher resolutions require significantly more processing power and memory. LooperVid V2.0 uses multi-threaded WebAssembly for faster encoding, but 2K and 4K exports will still take longer than 720p or 1080p. For the fastest results, use 720p with 128 kbps audio."
         }
       }
     ]
@@ -237,7 +259,7 @@
         "@type": "HowToStep",
         "position": 1,
         "name": "Upload your image or GIF",
-        "text": "Drag and drop or click to browse and select your image or GIF file."
+        "text": "Drag and drop or click to browse and select your GIF, JPG, PNG, or WebP image file."
       },
       {
         "@type": "HowToStep",
@@ -248,20 +270,20 @@
       {
         "@type": "HowToStep",
         "position": 3,
-        "name": "Select quality preset",
-        "text": "Choose between Fast, Balanced, or High quality options."
+        "name": "Choose export settings",
+        "text": "Select your preferred video resolution (720p, 1080p, 2K, or 4K) and audio bitrate (128, 192, 256, or 320 kbps) from the Export Settings panel."
       },
       {
         "@type": "HowToStep",
         "position": 4,
         "name": "Process the video",
-        "text": "Click the 'Process Video' button and wait for the conversion to complete."
+        "text": "Click the 'Process & Render Video' button. The multi-threaded WASM engine will encode your video with a real-time progress bar and time estimate."
       },
       {
         "@type": "HowToStep",
         "position": 5,
         "name": "Download your video",
-        "text": "Once processing is complete, download your YouTube-ready MP4 video."
+        "text": "Once processing is complete, download your high-quality YouTube-ready MP4 video."
       }
     ]
   }
@@ -270,13 +292,43 @@
   <!-- Lightweight Analytics -->
   <script defer src="https://lightweight-analytics.vercel.app/api/script" data-api-key="la_UWDTNjQoXxmDgtiU48EkScEDLzvXLOSM">
   </script>
+  <script src="/coi-serviceworker.js"></script>
 </head>
 
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
+
+  <!-- Noscript fallback for crawlers and accessibility -->
+  <noscript>
+    <div style="max-width:800px;margin:0 auto;padding:2rem;font-family:system-ui,sans-serif">
+      <h1>LooperVid — Free GIF to Video Converter with Music</h1>
+      <p>Transform your GIFs and images into seamless, high-quality looping videos with synchronized audio. Now processing up to 15x faster with multi-threaded WebAssembly.</p>
+      <h2>How It Works</h2>
+      <ol>
+        <li><strong>Upload an image or GIF</strong> — Supports GIF, JPG, PNG, WebP</li>
+        <li><strong>Upload your audio</strong> — Supports MP3, M4A, WAV, OGG</li>
+        <li><strong>Choose export settings</strong> — Up to 4K resolution and 320kbps audio</li>
+        <li><strong>Process &amp; download</strong> — Get a YouTube-ready MP4 video</li>
+      </ol>
+      <h2>Why LooperVid?</h2>
+      <ul>
+        <li>100% free with no sign-up required</li>
+        <li>All processing happens locally in your browser — your files never leave your device</li>
+        <li>Multi-threaded WASM engine for blazing-fast encoding</li>
+        <li>Export in 720p, 1080p, 2K, or 4K resolution</li>
+        <li>Perfect for slowed+reverb, lo-fi, and aesthetic music videos</li>
+      </ul>
+      <h2>Frequently Asked Questions</h2>
+      <h3>Is LooperVid free?</h3>
+      <p>Yes, LooperVid is completely free with no hidden fees, subscriptions, or watermarks.</p>
+      <h3>Are my files private?</h3>
+      <p>Absolutely. LooperVid uses WebAssembly to process everything locally. Your files are never uploaded to any server.</p>
+      <h3>What formats are supported?</h3>
+      <p>Images: GIF, JPG, PNG, WebP. Audio: MP3, M4A, WAV, OGG. Output: YouTube-compatible MP4.</p>
+      <p>Please enable JavaScript to use LooperVid.</p>
+    </div>
+  </noscript>
 </body>
 
 </html>
-</CodeContent>
-<parameter name="EmptyFile">false

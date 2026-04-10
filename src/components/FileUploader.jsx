@@ -1,5 +1,6 @@
 import { useCallback, useState, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
+import MinimalAudioPlayer from './MinimalAudioPlayer';
 import './FileUploader.css';
 
 function FileUploader({ onImageSelect, onAudioSelect, imageFile, audioFile }) {
@@ -119,7 +120,7 @@ function FileUploader({ onImageSelect, onAudioSelect, imageFile, audioFile }) {
   };
 
   return (
-    <div className="file-uploader">
+    <div className="file-uploader glass-card uploader-panel">
       <div className="upload-section">
         <h3>Upload Image or GIF</h3>
         <div
@@ -167,8 +168,7 @@ function FileUploader({ onImageSelect, onAudioSelect, imageFile, audioFile }) {
           <input {...audioDropzone.getInputProps()} />
           {audioPreview ? (
             <div className="preview-container">
-              <audio controls src={audioPreview} className="preview-audio" />
-              <p className="file-name">{audioFile?.name}</p>
+              <MinimalAudioPlayer src={audioPreview} fileName={audioFile?.name} />
               <button
                 type="button"
                 onClick={(e) => {
@@ -194,11 +194,6 @@ function FileUploader({ onImageSelect, onAudioSelect, imageFile, audioFile }) {
           ref={audioDropzone.inputRef}
           style={{ display: 'none' }}
         />
-      </div>
-
-      <div className="file-size-warning">
-        <span className="warning-icon">⚠️</span>
-        <span>For best results, keep file sizes under <strong>20MB</strong> each</span>
       </div>
     </div>
   );

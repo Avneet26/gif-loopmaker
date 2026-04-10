@@ -1,28 +1,57 @@
-/* Header - Modern Minimal */
+/* Header - Professional Modern */
 .header {
     text-align: center;
-    margin-bottom: 4rem;
-    padding-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.85rem;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.badge-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    display: inline-block;
 }
 
 .header h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.25rem;
     color: var(--color-text-primary);
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
 }
 
-.header h1 .emoji {
-    display: inline-block;
-    margin-right: 0.5rem;
+.text-gradient {
+    background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .subtitle {
     color: var(--color-text-secondary);
-    font-size: 1.125rem;
+    font-size: 1.15rem;
     font-weight: 400;
-    max-width: 500px;
+    max-width: 540px;
     margin: 0 auto;
     line-height: 1.6;
 }
@@ -30,14 +59,15 @@
 @media (max-width: 768px) {
     .header {
         margin-bottom: 3rem;
-        padding-top: 1rem;
+        padding-top: 2rem;
     }
 
     .header h1 {
-        font-size: 2.25rem;
+        font-size: 2.5rem;
     }
 
     .subtitle {
-        font-size: 1rem;
+        font-size: 1.05rem;
+        padding: 0 1rem;
     }
 }
