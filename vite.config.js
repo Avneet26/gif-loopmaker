@@ -10,4 +10,13 @@ export default defineConfig({
   worker: {
     format: 'es',
   },
+  server: {
+    proxy: {
+      '/la/api': {
+        target: 'https://lightweight-analytics.vercel.app',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/la\/api/, '/api')
+      }
+    }
+  }
 })
