@@ -68,7 +68,7 @@
   <link rel="apple-touch-icon" href="/favicon.svg" />
 
   <!-- Preconnect for Performance -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://unpkg.com" />
 
@@ -76,10 +76,10 @@
   <link rel="dns-prefetch" href="https://unpkg.com" />
 
   <!-- Preload critical font for LCP -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" crossorigin />
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" crossorigin />
 
   <!-- Structured Data / JSON-LD Schema -->
   <script type="application/ld+json">
@@ -291,6 +291,15 @@
 
   <!-- Lightweight Analytics -->
   <script defer src="/la/api/script" data-api-key="la_UWDTNjQoXxmDgtiU48EkScEDLzvXLOSM">
+  </script>
+  <!-- Deregister the COI service worker when native COOP/COEP headers are active,
+       so it stops intercepting fetch requests that can deadlock WASM threads -->
+  <script>
+    window.coi = {
+      shouldRegister: () => !window.crossOriginIsolated,
+      shouldDeregister: () => window.crossOriginIsolated,
+      quiet: true
+    };
   </script>
   <script src="/coi-serviceworker.js"></script>
 </head>

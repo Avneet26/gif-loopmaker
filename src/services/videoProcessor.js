@@ -220,7 +220,8 @@ export async function processVideo(imageFile, audioFile, settings = { videoResol
         '-b:a', audioBitrate,
         '-pix_fmt', 'yuv420p',
         '-shortest',
-        '-movflags', '+faststart'
+        '-movflags', '+faststart',
+        '-threads', '4'
       );
     } else {
       // For static images: use -loop 1 to loop the image
@@ -238,7 +239,8 @@ export async function processVideo(imageFile, audioFile, settings = { videoResol
         '-b:a', audioBitrate,
         '-pix_fmt', 'yuv420p',
         '-shortest',
-        '-movflags', '+faststart'
+        '-movflags', '+faststart',
+        '-threads', '4'
       );
     }
 
