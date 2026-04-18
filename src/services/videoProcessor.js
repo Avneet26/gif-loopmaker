@@ -5,63 +5,47 @@ let ffmpegInstance = null;
 let isLoaded = false;
 let currentAbortController = null;
 
-/**
- * Initializes FFmpeg instance and loads the core
- * @returns {Promise<FFmpeg>} Initialized FFmpeg instance
- */
 async function loadFFmpeg() {
   if (isLoaded && ffmpegInstance) {
     return ffmpegInstance;
   }
 
+  if (typeof SharedArrayBuffer === 'undefined') {
+    throw new Error('Multi-threaded FFmpeg requires SharedArrayBuffer. Please use a browser that supports cross-origin isolation.');
+  }
+
   const ffmpeg = new FFmpeg();
   ffmpegInstance = ffmpeg;
 
-  // Set up logging
   ffmpeg.on('log', ({ message }) => {
     console.log('FFmpeg:', message);
   });
 
-  // Set up progress tracking
-  ffmpeg.on('progress', ({ progress, time }) => {
+  ffmpeg.on('progress', ({ progress }) => {
     if (progress !== undefined) {
       console.log(`FFmpeg progress: ${(progress * 100).toFixed(2)}%`);
     }
   });
 
+  const mtBaseURL = 'https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/esm';
+
   try {
-    // Load FFmpeg core-mt safely for multi-threading
-    const baseURL = 'https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/esm';
-
-    try {
-      await ffmpeg.load({
-        coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-        wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-        workerURL: await toBlobURL(`${baseURL}/ffmpeg-core.worker.js`, 'text/javascript'),
-      });
-    } catch (loadError) {
-      console.error('Error loading FFmpeg core files:', loadError);
-
-      // Check for specific error types
-      if (loadError.message && loadError.message.includes('fetch')) {
-        throw new Error('Failed to download FFmpeg files. Please check your internet connection and try again.');
-      } else if (loadError.message && loadError.message.includes('SharedArrayBuffer')) {
-        throw new Error('Your browser does not support SharedArrayBuffer. Please use a modern browser like Chrome, Firefox, or Edge.');
-      } else {
-        throw new Error('Failed to load FFmpeg. Please refresh the page and try again.');
-      }
-    }
-
+    console.log('Loading multi-threaded FFmpeg...');
+    await ffmpeg.load({
+      coreURL: await toBlobURL(`${mtBaseURL}/ffmpeg-core.js`, 'text/javascript'),
+      wasmURL: await toBlobURL(`${mtBaseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+      workerURL: await toBlobURL(`${mtBaseURL}/ffmpeg-core.worker.js`, 'text/javascript'),
+    });
     isLoaded = true;
-    console.log('FFmpeg loaded successfully');
+    console.log('FFmpeg loaded successfully (multi-threaded)');
     return ffmpeg;
-  } catch (error) {
-    console.error('Error loading FFmpeg:', error);
-    // Re-throw with user-friendly message if it's already our custom error
-    if (error.message && error.message.startsWith('Failed to')) {
-      throw error;
+  } catch (loadError) {
+    console.error('Error loading FFmpeg core files:', loadError);
+    ffmpegInstance = null;
+    if (loadError.message && loadError.message.includes('fetch')) {
+      throw new Error('Failed to download FFmpeg files. Please check your internet connection and try again.');
     }
-    throw new Error('Something went wrong while loading FFmpeg. Please refresh the page and try again.');
+    throw new Error('Failed to load FFmpeg. Please refresh the page and try again.');
   }
 }
 
@@ -184,12 +168,13 @@ export async function processVideo(imageFile, audioFile, settings = { videoResol
       throw new Error('Processing was cancelled.');
     }
 
-    console.log(`Processing ${isGif ? 'GIF' : 'image'} with audio using FFmpeg...`);
+    console.log(`Processing ${isGif ? 'GIF' : 'image'} with audio using FFmpeg (multi-threaded)...`);
 
-    // Determine settings based on user selection
+    // Use fewer threads in multi-threaded WASM to prevent deadlocks
     let preset = 'fast';
     let crf = '26';
     let audioBitrate = settings.audioBitrate || '192k';
+    let threadCount = '2';
     
     let resolutionHeight;
     switch(settings.videoResolution) {
@@ -221,7 +206,7 @@ export async function processVideo(imageFile, audioFile, settings = { videoResol
         '-pix_fmt', 'yuv420p',
         '-shortest',
         '-movflags', '+faststart',
-        '-threads', '4'
+        '-threads', threadCount
       );
     } else {
       // For static images: use -loop 1 to loop the image
@@ -240,12 +225,13 @@ export async function processVideo(imageFile, audioFile, settings = { videoResol
         '-pix_fmt', 'yuv420p',
         '-shortest',
         '-movflags', '+faststart',
-        '-threads', '4'
+        '-threads', threadCount
       );
     }
 
     ffmpegArgs.push(outputName);
 
+    console.log('FFmpeg args:', ffmpegArgs.join(' '));
     await ffmpeg.exec(ffmpegArgs);
 
     console.log('Video processed. Reading output...');
